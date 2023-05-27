@@ -1,8 +1,9 @@
+import { NavBar } from "@components/NavBar";
+import { CreateTestPage } from "@pages/CreateTest";
+import { StatisticsPage } from "@pages/Statistics";
+import { TestsPage } from "@pages/Tests";
 import { Route, Routes } from "react-router-dom";
-import { StatisticsPage } from "./views/pages/Statistics";
-import { NavBar } from "./views/components/NavBar";
-import { CreateTestPage } from "./views/pages/CreateTest";
-import { TestsPage } from "./views/pages/Tests";
+
 
 function App() {
     return (

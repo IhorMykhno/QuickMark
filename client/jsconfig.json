@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@pages/*": ["src/views/pages/*"],
+            "@components/*": ["src/views/components/*"],
+            "@axios/*": ["src/services/axios/*"],
+            "@network/*": ["src/services/network/*"],
+            "@router/*": ["src/services/router/*"],
+            "@images/*": ["src/assets/images/*"]
+        }
+    }
+}
