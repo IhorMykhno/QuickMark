@@ -1,10 +1,5 @@
-import { PageWrapper } from "@components/PageWrapper";
-import { Typography } from "@mui/material";
+import { ComingSoonComponent } from "@components/ComingSoon";
 
 export const TestsPage = () => {
-    return (
-        <PageWrapper>
-            <Typography>Hello TestsPage</Typography>
-        </PageWrapper>
-    );
+    return <ComingSoonComponent />;
 };

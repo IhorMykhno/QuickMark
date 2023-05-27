@@ -1,9 +1,5 @@
-import { PageWrapper } from "@components/PageWrapper";
+import { ComingSoonComponent } from "@components/ComingSoon";
 
 export const StatisticsPage = () => {
-    return (
-        <PageWrapper>
-            <Typography>Hello Statistics</Typography>
-        </PageWrapper>
-    );
+    return <ComingSoonComponent />;
 };

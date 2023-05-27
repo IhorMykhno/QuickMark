@@ -21,7 +21,7 @@ export default defineConfig({
             "@axios": path.resolve(__dirname, "./src/services/axios"),
             "@network": path.resolve(__dirname, "./src/services/network"),
             "@router": path.resolve(__dirname, "./src/services/router"),
-            "@images": path.resolve(__dirname, "./src/assets/images"),
+            "@assets": path.resolve(__dirname, "./src/assets"),
         },
     },
 });
