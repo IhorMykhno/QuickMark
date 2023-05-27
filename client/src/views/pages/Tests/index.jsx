@@ -1,5 +1,5 @@
+import { PageWrapper } from "@components/PageWrapper";
 import { Typography } from "@mui/material";
-import { PageWrapper } from "../../components/PageWrapper";
 
 export const TestsPage = () => {
     return (
