@@ -6,10 +6,10 @@ services:
     depends_on:
       - db
     ports:
-      - '8081:8081'
+      - '8000:8000'
     volumes:
       - './api:/app'
-    command: 'uvicorn app.main:app --host 0.0.0.0 --port 8081'
+    command: 'python main.py'
   client:
     restart: always
     build: ./client
