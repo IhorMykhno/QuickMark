@@ -22,6 +22,7 @@ export default defineConfig({
             "@network": path.resolve(__dirname, "./src/services/network"),
             "@router": path.resolve(__dirname, "./src/services/router"),
             "@assets": path.resolve(__dirname, "./src/assets"),
+            "@constants": path.resolve(__dirname, "./src/constants"),
         },
     },
 });

@@ -7,7 +7,8 @@
             "@axios/*": ["src/services/axios/*"],
             "@network/*": ["src/services/network/*"],
             "@router/*": ["src/services/router/*"],
-            "@assets/*": ["src/assets/*"]
+            "@assets/*": ["src/assets/*"],
+            "@constants/*": ["src/constants/*"]
         }
     }
 }
