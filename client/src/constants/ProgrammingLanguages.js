@@ -1,5 +1,4 @@
 export const Languages = [
-    { label: "Python" },
-    { label: "Java" },
-    { label: "Go" },
+    { label: "Python", value: ".py" },
+    { label: "Java Script", value: ".js" },
 ];

@@ -1,29 +1,30 @@
 import { useState } from "react";
-import { isEmpty } from "lodash";
-import { CustomSelector } from "@components/CustomSelector";
-import { FormFieldsWrapper } from "@components/Wrappers/FormFiledWrapper";
+import { isEmpty, keys, values } from "lodash";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { CodeBlock } from "@network/codeBlock";
 import { Languages } from "@constants/ProgrammingLanguages";
+import { CustomSelector } from "@components/CustomSelector";
+import { FormFieldsWrapper } from "@components/Wrappers/FormFiledWrapper";
 
 export const CodeInputFiledComponent = () => {
     const hardCodedVariable = {
-        exerciseLabel: "Please use code-block to answer the question",
-        codeBlockRows: 4,
+        codeBlockLabel: "Please use code-block to answer the question",
+        inputCodeRows: 4,
     };
 
     const [codeLanguage, setCodeLanguage] = useState("");
     const [inputCode, setInputCode] = useState("");
+    const [output, setOutput] = useState({ status: "", message: "" });
 
     const isRunCodeDisabled = () => isEmpty(codeLanguage) || isEmpty(inputCode);
 
     const handleRunCode = async () => {
         try {
-            const res = await CodeBlock.RunCode({
+            const { data } = await CodeBlock.RunCode({
                 codeLanguage,
                 code: inputCode,
             });
-            console.log(res);
+            setOutput({ status: keys(data).toString(), message: values(data) });
         } catch (error) {
             console.log(error);
         }
@@ -35,15 +36,31 @@ export const CodeInputFiledComponent = () => {
         <FormFieldsWrapper>
             <Stack spacing={2}>
                 <Typography variant={"h6"}>
-                    {hardCodedVariable.exerciseLabel}
+                    {hardCodedVariable.codeBlockLabel}
                 </Typography>
                 <Stack spacing={2}>
                     <TextField
                         defaultValue={inputCode}
                         multiline
-                        rows={hardCodedVariable.codeBlockRows}
+                        rows={hardCodedVariable.inputCodeRows}
                         onChange={handleChangeInput}
                     />
+                    <Stack>
+                        <Typography>Output:</Typography>
+                        <TextField
+                            defaultValue={output.message}
+                            multiline
+                            disabled
+                            sx={{
+                                "& .MuiInputBase-input.Mui-disabled": {
+                                    WebkitTextFillColor:
+                                        output.status === "error"
+                                            ? "#DC143C"
+                                            : "#008000",
+                                },
+                            }}
+                        />
+                    </Stack>
                     <Stack direction={"row"} spacing={2}>
                         <Button
                             variant={"contained"}
