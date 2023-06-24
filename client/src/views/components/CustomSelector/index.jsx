@@ -18,7 +18,7 @@ export const CustomSelector = ({
                 onChange={handleChange}
             >
                 {items.map((item, index) => (
-                    <MenuItem key={index} value={item.label}>
+                    <MenuItem key={index} value={item.value}>
                         {item.label}
                     </MenuItem>
                 ))}
