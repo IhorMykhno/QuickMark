@@ -9,6 +9,7 @@ services:
       - '8000:8000'
     volumes:
       - './api:/app'
+      - ./sharedFiles:/app/sharedFiles
     command: 'python main.py'
   client:
     restart: always
@@ -32,7 +33,7 @@ services:
       MYSQL_DATABASE: database
       MYSQL_ROOT_PASSWORD: 12345
     volumes:
-      - ./db/:/var/lib/mysql'
+      - ./db/:/var/lib/mysql
     ports:
       - '3306:3306'
     tty: true
@@ -43,5 +44,6 @@ services:
       - '8090:8090'
     volumes:
       - './ubuntu:/app'
+      - ./sharedFiles:/app/sharedFiles
     tty: true
     command: npm start
