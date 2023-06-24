@@ -1,19 +1,27 @@
 import time
 import os
-from ...constants.code_languages import language_types
+import requests
 
 
 def runUserCode(request):
     code = request.code
-    code_language = request.codeLanguage
-    generate_file_name = int(round(time.time()))
+    file_type = request.codeLanguage
+
+    file_name = int(round(time.time()))
 
     try:
-        with open(
-            f"./userCodeFiles/{generate_file_name}{language_types[code_language]}", "w"
-        ) as file:
+        with open(f"./sharedFiles/{file_name}{file_type}", "w") as file:
             file.write(code)
             file.close()
 
-    except Exception(err):
-        print(err)
+    except Exception as error:
+        os.unlink(f"./sharedFiles/{file_name}{file_type}")
+
+    compilationResult = requests.post(
+        "http://ubuntu:8090/code/run",
+        data={"fileName": file_name, "fileType": file_type},
+    )
+
+    os.unlink(f"./sharedFiles/{file_name}{file_type}")
+
+    return compilationResult.json()
