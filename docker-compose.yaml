@@ -36,3 +36,12 @@ services:
     ports:
       - '3306:3306'
     tty: true
+  ubuntu:
+    restart: on-failure
+    build: ./ubuntu
+    ports:
+      - '8090:8090'
+    volumes:
+      - './ubuntu:/app'
+    tty: true
+    command: npm start
