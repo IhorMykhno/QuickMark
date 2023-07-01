@@ -5,7 +5,6 @@ var codeRunControllers = require("../controllers/codeRun.controller");
 router.post("/", async (req, res) => {
     const { fileType, fileName } = req.body;
 
-    console.log(fileType, fileName);
     try {
         let result = "";
 
