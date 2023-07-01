@@ -5,6 +5,7 @@ import { CodeBlock } from "@network/codeBlock";
 import { Languages } from "@constants/ProgrammingLanguages";
 import { CustomSelector } from "@components/CustomSelector";
 import { FormFieldsWrapper } from "@components/Wrappers/FormFiledWrapper";
+import CodeEditor from "@uiw/react-textarea-code-editor";
 
 export const CodeInputFiledComponent = () => {
     const hardCodedVariable = {
@@ -12,16 +13,22 @@ export const CodeInputFiledComponent = () => {
         inputCodeRows: 4,
     };
 
-    const [codeLanguage, setCodeLanguage] = useState("");
+    const [codeLanguage, setCodeLanguage] = useState({
+        type: "",
+        editorType: "",
+    });
     const [inputCode, setInputCode] = useState("");
     const [output, setOutput] = useState({ status: "", message: "" });
 
-    const isRunCodeDisabled = () => isEmpty(codeLanguage) || isEmpty(inputCode);
+    const isRunCodeDisabled = () =>
+        isEmpty(codeLanguage.type) ||
+        isEmpty(codeLanguage.editorType) ||
+        isEmpty(inputCode);
 
     const handleRunCode = async () => {
         try {
             const { data } = await CodeBlock.RunCode({
-                codeLanguage,
+                codeLanguage: codeLanguage.type,
                 code: inputCode,
             });
             setOutput({ status: keys(data).toString(), message: values(data) });
@@ -32,63 +39,87 @@ export const CodeInputFiledComponent = () => {
 
     const handleChangeInput = ({ target }) => setInputCode(target.value);
 
+    const getEditorType = (type) => type.split(".")[1];
+
+    const renderCodeEditor = () => {
+        return (
+            <Box minHeight={200}>
+                <CodeEditor
+                    minHeight={200}
+                    value={inputCode}
+                    data-color-mode="dark"
+                    language={codeLanguage.editorType}
+                    placeholder="Please enter your code here."
+                    onChange={handleChangeInput}
+                    padding={25}
+                    style={{
+                        fontSize: 14,
+                        fontFamily:
+                            "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                    }}
+                />
+            </Box>
+        );
+    };
+
+    const renderCodeOutput = () => {
+        return (
+            <Box minHeight={100}>
+                <CodeEditor
+                    disabled
+                    minHeight={100}
+                    value={output.message}
+                    data-color-mode="dark"
+                    padding={25}
+                    style={{
+                        color:
+                            output.status === "error" ? "#DC143C" : "#FFFFFF",
+                        fontSize: 14,
+                        fontFamily:
+                            "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                    }}
+                />
+            </Box>
+        );
+    };
+
     return (
         <FormFieldsWrapper>
             <Stack spacing={2}>
                 <Typography variant={"h6"}>
                     {hardCodedVariable.codeBlockLabel}
                 </Typography>
-                <Stack spacing={2}>
-                    <TextField
-                        defaultValue={inputCode}
-                        multiline
-                        rows={hardCodedVariable.inputCodeRows}
-                        onChange={handleChangeInput}
-                    />
-                    <Stack>
-                        <Typography>Output:</Typography>
-                        <TextField
-                            defaultValue={output.message}
-                            multiline
-                            disabled
-                            sx={{
-                                "& .MuiInputBase-input.Mui-disabled": {
-                                    WebkitTextFillColor:
-                                        output.status === "error"
-                                            ? "#DC143C"
-                                            : "#008000",
-                                },
+                <Stack direction={"row"} spacing={2}>
+                    <Button
+                        variant={"contained"}
+                        size={"small"}
+                        disabled={isRunCodeDisabled()}
+                        onClick={handleRunCode}
+                    >
+                        Run Code
+                    </Button>
+                    <Box width={"200px"}>
+                        <CustomSelector
+                            id="code-language"
+                            items={Languages}
+                            label="Code Language"
+                            selectedItem={codeLanguage.type}
+                            handleChange={(e) => {
+                                const type = e.target.value;
+
+                                setCodeLanguage({
+                                    type,
+                                    editorType: getEditorType(type),
+                                });
                             }}
                         />
-                    </Stack>
-                    <Stack direction={"row"} spacing={2}>
-                        <Button
-                            variant={"contained"}
-                            size={"small"}
-                            disabled={isRunCodeDisabled()}
-                            onClick={handleRunCode}
-                        >
-                            Run Code
-                        </Button>
-                        <Button
-                            variant={"contained"}
-                            size={"small"}
-                            disabled={true}
-                            onClick={handleRunCode}
-                        >
-                            Compile Code
-                        </Button>
-                        <Box width={"200px"}>
-                            <CustomSelector
-                                id="code-language"
-                                items={Languages}
-                                label="Code Language"
-                                selectedItem={codeLanguage}
-                                handleChange={(e) =>
-                                    setCodeLanguage(e.target.value)
-                                }
-                            />
-                        </Box>
+                    </Box>
+                </Stack>
+                <Stack spacing={2}>
+                    {renderCodeEditor()}
+                    <Stack spacing={1}>
+                        <Typography>Output:</Typography>
+                        {renderCodeOutput()}
                     </Stack>
                 </Stack>
             </Stack>
