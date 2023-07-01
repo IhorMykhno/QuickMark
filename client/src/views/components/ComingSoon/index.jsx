@@ -10,7 +10,14 @@ export const ComingSoonComponent = () => {
                 height: "91vh",
             }}
         >
-            <Box width={"600px"} height={"80vh"} pl={"280px"} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
+            <Box
+                width={"600px"}
+                height={"80vh"}
+                pl={"280px"}
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+            >
                 <Stack direction={"row"} alignItems={"center"}>
                     <Box pr={"10px"}>
                         <Divider sx={{ background: "black", width: "100px" }} />
