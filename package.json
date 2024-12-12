@@ -1,0 +1,12 @@
+{
+  "name": "QuickMark",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev:up": "docker compose up",
+    "dev:down": "docker compose down"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
