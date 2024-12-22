@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev:up": "docker compose up",
+    "dev:up": "docker compose up -d",
     "dev:down": "docker compose down"
   },
   "author": "",
