@@ -1,3 +1,4 @@
+*.env
 /sharedFiles
-.idea
-.vscode
+/.vscode/
+/.idea/
