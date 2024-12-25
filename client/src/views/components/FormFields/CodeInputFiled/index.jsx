@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { isEmpty, keys, values } from "lodash";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { CodeBlock } from "@network/codeBlock";
 import { Languages } from "@constants/ProgrammingLanguages";
-import { CustomSelector } from "@components/CustomSelector";
+import { SelectField } from "@components/Customised/SelectField";
 import { FormFieldsWrapper } from "@components/Wrappers/FormFiledWrapper";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 
+//ToDo Need to remove or move to QuestionTypes folder
 export const CodeInputFiledComponent = () => {
     const hardCodedVariable = {
         codeBlockLabel: "Please use code-block to answer the question",
@@ -99,7 +100,7 @@ export const CodeInputFiledComponent = () => {
                         Run Code
                     </Button>
                     <Box width={"200px"}>
-                        <CustomSelector
+                        <SelectField
                             id="code-language"
                             items={Languages}
                             label="Code Language"

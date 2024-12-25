@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-export const CustomSelector = ({
+export const SelectField = ({
     label,
     id,
     items,
@@ -27,10 +27,10 @@ export const CustomSelector = ({
     );
 };
 
-CustomSelector.propTypes = {
+SelectField.propTypes = {
     label: PropTypes.string,
     id: PropTypes.string,
     items: PropTypes.array,
-    onChange: PropTypes.func,
+    handleChange: PropTypes.func,
     selectedItem: PropTypes.string,
 };
