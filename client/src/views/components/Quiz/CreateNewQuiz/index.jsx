@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
-import { CodeInputFiledComponent } from "@components/FormFields/CodeInputFiled/index.jsx";
-import { WithRunCodeComponent } from "@components/Quiz/QuestionTypes/WithRunCodeComponent/index.jsx";
+import { CodeInputFiledComponent } from "@components/FormFields/CodeInputFiled";
+import { WithRunCodeComponent } from "@components/Quiz/QuestionTypes/WithRunCodeComponent";
 
 /*
 * ToDo:
@@ -20,9 +20,23 @@ export const CreateNewQuiz = () => {
         disabled: false,
     }
 
+    const forWithPreconditionRunCodeComponent = {
+        number: 3,
+        condition: 'Some information here',
+        description: 'Some description here',
+        language: 'js',
+        placeholder: 'Please enter your code here',
+        disabled: false,
+        inputCode:`function test () {
+    // Here code
+}
+        `,
+    }
+
     return (
         <Stack spacing={4}>
             <WithRunCodeComponent {...forWithRunCodeComponent} />
+            <WithRunCodeComponent {...forWithPreconditionRunCodeComponent} />
             <CodeInputFiledComponent />
         </Stack>
     );

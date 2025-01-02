@@ -6,10 +6,10 @@ import { BaseQuestionComponent } from "@components/Quiz/QuestionTypes/BaseQuesti
 import { FormFieldsWrapper } from "@components/Wrappers/FormFiledWrapper/index.jsx";
 import { CodeEditorField } from "@components/Customised/CodeEditorField/index.jsx";
 
-export const WithRunCodeComponent = ({ language, placeholder, disabled, ...props}) => {
-    const [value, setValue] = useState('');
+export const WithRunCodeComponent = ({ inputCode= '', language, placeholder, disabled, ...props}) => {
+    const [value, setValue] = useState(inputCode);
 
-    const onChange = ({ target }) => target && setValue(target.value);
+    const onChange = ({ targІet }) => target && setValue(target.value);
 
     // ToDo: Add run code logic
     const onRunCode = () => {
@@ -43,6 +43,7 @@ export const WithRunCodeComponent = ({ language, placeholder, disabled, ...props
 }
 
 WithRunCodeComponent.propTypes = {
+    inputCode: PropTypes.string,
     language: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     disabled: PropTypes.bool.isRequired,
