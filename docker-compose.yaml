@@ -1,49 +1,50 @@
-version: '3.8'
 services:
-  api:
-    restart: always
-    build: ./api
-    depends_on:
-      - db
-    ports:
-      - '8000:8000'
-    volumes:
-      - './api:/app'
-      - ./sharedFiles:/app/sharedFiles
-    command: 'python main.py'
-  client:
-    restart: always
-    build: ./client
-    volumes:
-      - './client:/app'
-      - /app/node_modules
-    ports:
-      - '8080:8080'
-    stdin_open: true
-    environment:
-      - CHOKDIR_USERPOOLING=true
-    command: npm run dev
-  db:
-    image: 'nouchka/sqlite3:latest'
-    restart: on-failure
-    container_name: db
-    environment:
-      MYSQL_PASSWORD: 12345
-      MYSQL_USER: root
-      MYSQL_DATABASE: database
-      MYSQL_ROOT_PASSWORD: 12345
-    volumes:
-      - ./db/:/var/lib/mysql
-    ports:
-      - '3306:3306'
-    tty: true
-  ubuntu:
-    restart: on-failure
-    build: ./ubuntu
-    ports:
-      - '8090:8090'
-    volumes:
-      - './ubuntu:/app'
-      - ./sharedFiles:/app/sharedFiles
-    tty: true
-    command: npm start
+    api:
+        restart: always
+        build: ./api
+        depends_on:
+          - db
+        ports:
+          - '8000:8000'
+        volumes:
+          - './api:/app'
+          - ./sharedFiles:/app/sharedFiles
+        command: 'python main.py'
+    client:
+        restart: always
+        build: ./client
+        volumes:
+          - './client:/app'
+        ports:
+          - '8080:8080'
+        stdin_open: true
+        environment:
+          - CHOKDIR_USERPOOLING=true
+        command: npm run dev
+    ubuntu:
+        restart: on-failure
+        build: ./ubuntu
+        ports:
+          - '8090:8090'
+        volumes:
+          - './ubuntu:/app'
+          - ./sharedFiles:/app/sharedFiles
+        tty: true
+        command: npm start
+
+    db:
+        image: mariadb:11.3.2
+        restart: on-failure
+        environment:
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - /var/lib/quick_mark_database:/var/lib/mysql
+
+networks:
+    default:
+        name: quick_mark
