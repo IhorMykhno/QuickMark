@@ -1,6 +1,7 @@
 import { Stack } from "@mui/material";
 import { CodeInputFiledComponent } from "@components/FormFields/CodeInputFiled";
 import { WithRunCodeComponent } from "@components/Quiz/QuestionTypes/WithRunCodeComponent";
+import { WithOneRightAnswerComponent } from "@components/Quiz/QuestionTypes/WithOneRightAnswerComponent";
 
 /*
 * ToDo:
@@ -32,10 +33,22 @@ export const CreateNewQuiz = () => {
 }`,
     }
 
+    const oneRightAnswerComponent = {
+        number: 4,
+        condition: 'Some information here',
+        description: 'Some description here',
+        options: [
+            { value: 'answer1', label: 'Answer1' },
+            { value: 'answer2', label: 'Answer2' },
+            { value: 'answer3', label: 'Answer3' },
+        ],
+    }
+
     return (
         <Stack spacing={4}>
             <WithRunCodeComponent {...forWithRunCodeComponent} />
             <WithRunCodeComponent {...forWithPreconditionRunCodeComponent} />
+            <WithOneRightAnswerComponent {...oneRightAnswerComponent} />
             <CodeInputFiledComponent />
         </Stack>
     );
