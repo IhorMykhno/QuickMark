@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { isEmpty } from "lodash";
-import { Box, Button, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { BaseQuestionComponent } from "@components/Quiz/QuestionTypes/BaseQuestionComponent/index.jsx";
 import { FormFieldsWrapper } from "@components/Wrappers/FormFiledWrapper/index.jsx";
 import { CodeEditorField } from "@components/Customised/CodeEditorField/index.jsx";
 
-export const WithRunCodeComponent = ({ language, placeholder, disabled, ...props}) => {
-    const [value, setValue] = useState('');
+export const WithRunCodeComponent = ({ inputCode= '', language, placeholder, disabled, ...props}) => {
+    const [value, setValue] = useState(inputCode);
 
     const onChange = ({ target }) => target && setValue(target.value);
 
@@ -27,7 +27,7 @@ export const WithRunCodeComponent = ({ language, placeholder, disabled, ...props
                    onChange={onChange}
                    disabled={disabled}
                />
-              <Box>
+              <Stack spacing={2} direction={'row'}>
                   <Button
                       variant={"contained"}
                       disabled={isEmpty(value)}
@@ -35,14 +35,24 @@ export const WithRunCodeComponent = ({ language, placeholder, disabled, ...props
                   >
                       Run Code
                   </Button>
+                  {
+                      !isEmpty(inputCode) &&
+                      <Button
+                          variant={"outlined"}
+                          onClick={() => setValue(inputCode)}
+                      >
+                          Refresh
+                      </Button>
+                  }
                   {/*ToDo: Add message success or error when button clicked */}
-              </Box>
+              </Stack>
            </Stack>
         </FormFieldsWrapper>
     );
 }
 
 WithRunCodeComponent.propTypes = {
+    inputCode: PropTypes.string,
     language: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     disabled: PropTypes.bool.isRequired,
