@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 
 export const PageWrapper = ({ children }) => {
     return (
-        <Box px={"120px"} pt={"40px"}>
+        <Box px={"120px"} pt={"40px"} pb={"40px"}>
             {children}
         </Box>
     );

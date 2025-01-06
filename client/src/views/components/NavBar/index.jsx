@@ -26,10 +26,8 @@ export const NavBar = () => {
                     <Tabs value={menuTub} onChange={onChange}>
                         <Tab label="Statistics" onClick={() => navigate("/")} />
                         <Tab label="Tests" onClick={() => navigate("/tests")} />
-                        <Tab
-                            label="Create test"
-                            onClick={() => navigate("/create-test")}
-                        />
+                        <Tab label="Create test" onClick={() => navigate("/create-test")} />
+                        <Tab label="Code Online" onClick={() => navigate("/code-online")}/>
                     </Tabs>
                 </Stack>
                 <Avatar>IM</Avatar>

@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material";
-import { CodeInputFiledComponent } from "@components/FormFields/CodeInputFiled";
 import { WithRunCodeComponent } from "@components/Quiz/QuestionTypes/WithRunCodeComponent";
 import { WithOneRightAnswerComponent } from "@components/Quiz/QuestionTypes/WithOneRightAnswerComponent";
 import { WithOpenAnswerComponent } from "@components/Quiz/QuestionTypes/WithOpenAnswerComponent";
 import { WithMultipleAnswersComponent } from "@components/Quiz/QuestionTypes/WithMultipleAnswersComponent";
+// import { CodeInputFiledComponent } from "@components/FormFields/CodeInputFiled";
 
 /*
 * ToDo:
@@ -71,7 +71,7 @@ export const CreateNewQuiz = () => {
             <WithOneRightAnswerComponent {...oneRightAnswerComponent} />
             <WithOpenAnswerComponent {...withOpenAnswerComponent} />
             <WithMultipleAnswersComponent {...withMultipleAnswers} />
-            <CodeInputFiledComponent />
+            {/*<CodeInputFiledComponent />*/}
         </Stack>
     );
 };
