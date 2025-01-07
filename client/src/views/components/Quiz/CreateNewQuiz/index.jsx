@@ -1,16 +1,12 @@
-import { Stack } from "@mui/material";
+import {Alert, Button, MenuItem, Select, Snackbar, Stack, Typography} from "@mui/material";
 import { WithRunCodeComponent } from "@components/Quiz/QuestionTypes/WithRunCodeComponent";
 import { WithOneRightAnswerComponent } from "@components/Quiz/QuestionTypes/WithOneRightAnswerComponent";
 import { WithOpenAnswerComponent } from "@components/Quiz/QuestionTypes/WithOpenAnswerComponent";
 import { WithMultipleAnswersComponent } from "@components/Quiz/QuestionTypes/WithMultipleAnswersComponent";
-// import { CodeInputFiledComponent } from "@components/FormFields/CodeInputFiled";
-
-/*
-* ToDo:
-*  1. When user open the page it's will see the creat test form
-*  2. When the user creates one of the tests, the created test will be added above the create test form
-*  3. When user finish to create the quiz it need to click on the "Save Quiz" button to save it
-* */
+import {FormFieldsWrapper} from "@components/Wrappers/FormFiledWrapper/index.jsx";
+import {useState} from "react";
+import {QuizHeader} from "@components/Quiz/CreateNewQuiz/QuizHeader/index.jsx";
+import {BuildQuizQuestion} from "@components/Quiz/CreateNewQuiz/BuildQuizQuestion";
 
 export const CreateNewQuiz = () => {
     // ToDo: test data remove after testing
@@ -27,7 +23,7 @@ export const CreateNewQuiz = () => {
         number: 3,
         condition: 'Some information here',
         description: 'Some description here',
-        language: 'js',
+        language: 'py',
         placeholder: 'Please enter your code here',
         disabled: false,
         inputCode:`function test () {
@@ -46,12 +42,6 @@ export const CreateNewQuiz = () => {
         ],
     };
 
-    const withOpenAnswerComponent = {
-        number: 5,
-        condition: 'Some information here',
-        description: 'Some description here',
-        label: 'Put your answer here'
-    };
 
     const withMultipleAnswers = {
         number: 6,
@@ -64,14 +54,63 @@ export const CreateNewQuiz = () => {
         ],
     };
 
+    const DEFAULT_QUIZ_HEADER = 'Назва тесту';
+
+    const [open, setOpen] = useState(false)
+    const [quizHeader, setQuizHeader] = useState(DEFAULT_QUIZ_HEADER)
+    const [questions, setQuestions] = useState([]);
+
+    const renderQuizQuestionByType = ({ type, options }) => {
+        switch (type) {
+            case 'OPEN_ANSWER':
+                return (key) => <WithOpenAnswerComponent key={key} number={key + 1} {...options} />
+            default:
+                return () => <></>
+        }
+    }
+
+    const handleAddQuestion = (questionOptions) =>
+        setQuestions([...questions, renderQuizQuestionByType(questionOptions)])
+
+    const onCreateQuiz = () => {
+        setQuestions([]);
+        setQuizHeader(DEFAULT_QUIZ_HEADER)
+        setOpen(true);
+    };
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
     return (
         <Stack spacing={4}>
+            <FormFieldsWrapper>
+                <QuizHeader header={quizHeader} onChange={({target}) => setQuizHeader(target.value)} />
+            </FormFieldsWrapper>
             <WithRunCodeComponent {...forWithRunCodeComponent} />
             <WithRunCodeComponent {...forWithPreconditionRunCodeComponent} />
             <WithOneRightAnswerComponent {...oneRightAnswerComponent} />
-            <WithOpenAnswerComponent {...withOpenAnswerComponent} />
             <WithMultipleAnswersComponent {...withMultipleAnswers} />
-            {/*<CodeInputFiledComponent />*/}
+            { questions.map((question, index) => question(index)) }
+            <FormFieldsWrapper>
+                <BuildQuizQuestion onCreateQuestion={handleAddQuestion} />
+            </FormFieldsWrapper>
+            <Button variant="outlined" size="large" color={'success'} onClick={onCreateQuiz}>
+                <Typography style={{ fontWeight: 600 }}>Опублікувати</Typography>
+            </Button>
+            <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseSnackbar}>
+                <Alert
+                    onClose={handleCloseSnackbar}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    The quiz successfully created!
+                </Alert>
+            </Snackbar>
         </Stack>
     );
 };
