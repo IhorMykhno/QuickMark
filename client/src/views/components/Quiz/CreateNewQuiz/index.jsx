@@ -14,7 +14,7 @@ export const CreateNewQuiz = () => {
         number: 2,
         condition: 'Some information here',
         description: 'Some description here',
-        language: 'js',
+        language: 'py',
         placeholder: 'Please enter your code here',
         disabled: false,
     }
@@ -23,7 +23,7 @@ export const CreateNewQuiz = () => {
         number: 3,
         condition: 'Some information here',
         description: 'Some description here',
-        language: 'py',
+        language: 'js',
         placeholder: 'Please enter your code here',
         disabled: false,
         inputCode:`function test () {
