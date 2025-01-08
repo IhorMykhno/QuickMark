@@ -4,7 +4,7 @@ import { Stack, Typography } from "@mui/material";
 export const BaseQuestionComponent = ({ number, condition, description }) => {
     return (
         <Stack spacing={2}>
-            <Typography variant={"h5"}>Exercise {number}</Typography>
+            <Typography variant={"h5"}>Завдання {number}</Typography>
             <Stack>
                 <Typography variant={"h6"}>{condition}</Typography>
                 <Typography variant={"subtitle1"}>{description}</Typography>

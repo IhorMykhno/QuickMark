@@ -11,46 +11,57 @@ import {BuildQuizQuestion} from "@components/Quiz/CreateNewQuiz/BuildQuizQuestio
 export const CreateNewQuiz = () => {
     // ToDo: test data remove after testing
     const forWithRunCodeComponent = {
-        number: 2,
-        condition: 'Some information here',
-        description: 'Some description here',
+        number: 1,
+        condition: 'Напишіть функцію, яка визначає чи чи є число простим',
+        description: 'Результат виклику залогуйте:',
         language: 'py',
         placeholder: 'Please enter your code here',
         disabled: false,
     }
 
     const forWithPreconditionRunCodeComponent = {
-        number: 3,
-        condition: 'Some information here',
-        description: 'Some description here',
+        number: 2,
+        condition: 'Маємо уривок коду. Розширити функцію isPrime(), щоб вона визначала чи є число простим',
+        description: 'Функція повинна повернути True, якщо число просте, та False, якщо ні',
         language: 'js',
         placeholder: 'Please enter your code here',
         disabled: false,
-        inputCode:`function test () {
-    // Here code
-}`,
+        inputCode:`function isPrime () {
+    // ########################################
+    // Вкажіть ваш код тут
+    // ########################################
+}
+
+const numb1 = 2;
+const numb2 = 10;
+
+console.log(isPrime(numb1, numb2))
+`,
     }
 
     const oneRightAnswerComponent = {
-        number: 4,
-        condition: 'Some information here',
+        number: 3,
+        condition: 'Який тип даних повертає функція "typeof NaN"',
         description: 'Some description here',
         options: [
-            { value: 'answer1', label: 'Answer1' },
-            { value: 'answer2', label: 'Answer2' },
-            { value: 'answer3', label: 'Answer3' },
+            { value: 'number', label: 'number' },
+            { value: 'string', label: 'string' },
+            { value: 'boolean', label: 'boolean' },
+            { value: 'function', label: 'function' },
         ],
     };
 
 
     const withMultipleAnswers = {
-        number: 6,
-        condition: 'Some information here',
-        description: 'Some description here',
+        number: 4,
+        condition: 'Яка з наступних характеристик НЕ є характеристикою змінної',
+        description: 'Оберіть одну або декілька відповідей:',
         options: [
-            { label: 'Selected 1'},
-            { label: 'Selected 2'},
-            { label: 'Selected 3'},
+            { label: "Змінна має ім'я"},
+            { label: 'Змінна може мати тип даних'},
+            { label: 'Змінна може зберігати значення'},
+            { label: 'Змінна може використовуватись в будь якому місці програми'},
+            { label: 'Змінна може бути динамічно створена під час виконання програми'},
         ],
     };
 
